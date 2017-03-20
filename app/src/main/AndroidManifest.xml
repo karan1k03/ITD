@@ -25,7 +25,8 @@
         <activity android:name=".welcomeU" />
         <activity android:name=".ScanNumberPlate" />
         <activity android:name=".LoginM" />
-        <activity android:name=".Toll"></activity>
+        <activity android:name=".Toll" />
+        <activity android:name=".Payment"></activity>
     </application>
 
 </manifest>
