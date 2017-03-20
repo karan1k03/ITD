@@ -60,9 +60,7 @@ public class ScanNumberPlate extends AppCompatActivity {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 // License plate number send to the server in the form of JSON
-                                LoginRequest loginRequesta=new LoginRequest();
-                                dialog.dismiss();
-                                mTextView.setText((loginRequesta.execute()).toString());
+                                new LoginRequest().execute();
 
                             }
                         }) // request to server
@@ -192,7 +190,8 @@ public class ScanNumberPlate extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return parentObject.toString();
+           // mTextView.setText(parentObject.toString());
+            return  null;
         }
 
         @Override
