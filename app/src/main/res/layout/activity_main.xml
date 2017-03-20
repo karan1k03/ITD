@@ -9,7 +9,7 @@
     <Button
 
         android:id="@+id/button"
-        android:layout_width="293dp"
+        android:layout_width="292dp"
         android:layout_height="45dp"
         android:text="User Login"
         android:paddingTop="10dp"
@@ -26,7 +26,7 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="288dp"
+        android:layout_width="292dp"
         android:layout_height="42dp"
         android:text="Merchant Login"
         android:layout_marginLeft="8dp"
