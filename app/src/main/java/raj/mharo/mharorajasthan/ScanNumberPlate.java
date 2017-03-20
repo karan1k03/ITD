@@ -1,7 +1,10 @@
 package raj.mharo.mharorajasthan;
 
 import android.Manifest;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -30,6 +33,7 @@ import java.io.IOException;
 public class ScanNumberPlate extends AppCompatActivity {
     private SurfaceView mCameraView;
     private TextView mTextView;
+    public String str;
     private CameraSource mCameraSource;
     Button button3;
 
@@ -56,19 +60,10 @@ public class ScanNumberPlate extends AppCompatActivity {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 // License plate number send to the server in the form of JSON
-                                UserFunctions userFunction = new UserFunctions();
-                                JSONObject json = null;
-                                try {
-                                    json = userFunction.merchant(str,"1");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                JSONObject parentObject= null;
-                                try {
-                                    parentObject = new JSONObject(json.toString());
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                LoginRequest loginRequesta=new LoginRequest();
+                                dialog.dismiss();
+                                mTextView.setText((loginRequesta.execute()).toString());
+
                             }
                         }) // request to server
 
@@ -175,4 +170,36 @@ public class ScanNumberPlate extends AppCompatActivity {
             }
         }
     }
+    public class LoginRequest extends AsyncTask<String,String,String>
+    {
+        private ProgressDialog pDialog;
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(String... strings)
+        {
+            UserFunctions userFunction = new UserFunctions();
+            JSONObject json = null;
+            try {
+                json = userFunction.merchant(str,"1");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            JSONObject parentObject= null;
+            try {
+                parentObject = new JSONObject(json.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return parentObject.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+    }
+
 }
