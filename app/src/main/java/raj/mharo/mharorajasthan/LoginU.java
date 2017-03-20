@@ -50,7 +50,7 @@ public class LoginU extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings)
         {
-            username=email.getText().toString();
+            username=email.getTex().toString();
             pass=password.getText().toString();
             UserFunctions userFunction = new UserFunctions();
             JSONObject json = null;
