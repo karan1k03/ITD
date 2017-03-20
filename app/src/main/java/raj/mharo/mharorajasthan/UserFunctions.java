@@ -14,12 +14,12 @@ public class UserFunctions {
    /* public UserFunctions(){
         jsonParser = new JSONParser();
     }*/
-    public JSONObject merchant(String vehicleNumber, String merchantId) throws JSONException {
+    public  JSONObject merchant(String vehicleNumber, String merchantId) throws JSONException {
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("mt_id",merchantId);
         jsonObject.put("plate_number",vehicleNumber);
-        JSONObject json = jsonParser.getJSONFromUrl("http://www.itsohkay.in/mharo_rajasthan_api/merchant_toll.php",jsonObject);
-        return json;
+        JSONObject a = jsonParser.getJSONFromUrl("http://www.itsohkay.in/mharo_rajasthan_api/merchant_toll.php",jsonObject);
+        return a;
     }
     public JSONObject userVehicleReg(String SSoid, String PlateNumber, String VehicleType) throws JSONException {
         JSONObject jsonObject=new JSONObject();

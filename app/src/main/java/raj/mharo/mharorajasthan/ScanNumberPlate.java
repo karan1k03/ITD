@@ -179,7 +179,7 @@ public class ScanNumberPlate extends AppCompatActivity {
             UserFunctions userFunction = new UserFunctions();
             JSONObject json = null;
             try {
-                json = userFunction.merchant("1234567","1");
+                json = userFunction.merchant("123456","1");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -197,7 +197,6 @@ public class ScanNumberPlate extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             mTextView.setText(parentObject.toString());
-
         }
     }
 
