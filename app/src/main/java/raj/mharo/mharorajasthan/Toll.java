@@ -17,6 +17,7 @@ public class Toll extends AppCompatActivity {
     EditText ln;
     EditText vehicle;
     Button changes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
