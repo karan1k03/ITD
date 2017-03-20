@@ -190,7 +190,7 @@ public class ScanNumberPlate extends AppCompatActivity {
         protected String doInBackground(String... strings)
         {
             try {
-                URL loginUrl=new URL("http://www.itsohkay.in/mharo_rajasthan_api/merchant_toll.php");
+                URL loginUrl=new URL("http://www.itsohkay.in/mharo_rajasthan_api/test.php");
                 connection=(HttpURLConnection)loginUrl.openConnection();
                    connection.setRequestMethod("POST");
                 connection.connect();
