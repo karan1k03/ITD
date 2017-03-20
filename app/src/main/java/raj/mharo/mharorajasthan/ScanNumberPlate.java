@@ -28,14 +28,26 @@ import com.google.android.gms.vision.text.TextRecognizer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ScanNumberPlate extends AppCompatActivity {
+    JSONObject jsonObject;
     private SurfaceView mCameraView;
     private TextView mTextView;
     public String str;
     private CameraSource mCameraSource;
     Button button3;
+    HttpURLConnection connection;
+    BufferedReader reader=null;
+    static JSONObject jObj = null;
+    static String json = "";
+    StringBuffer buffer=null;
 
     private final int REQUESTCAMERA = 1001;
     @Override
@@ -177,27 +189,51 @@ public class ScanNumberPlate extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings)
         {
-            UserFunctions userFunction = new UserFunctions();
-            JSONObject json = null;
             try {
-                json = userFunction.merchant(str,"1");
+                URL loginUrl=new URL("http://www.itsohkay.in/mharo_rajasthan_api/merchant_toll.php");
+                connection=(HttpURLConnection)loginUrl.openConnection();
+                   connection.setRequestMethod("POST");
+                connection.connect();
+                jsonObject=new JSONObject();
+                jsonObject.put("mt_id","1");
+                jsonObject.put("plate_number","1234567");
+                 OutputStreamWriter details=new OutputStreamWriter(connection.getOutputStream());
+                details.write(jsonObject.toString());
+                details.flush();
+
+                reader=new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                buffer=new StringBuffer();
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line);
+                }
+                json=buffer.toString();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
+            } finally {
+                if(connection!=null)
+                {
+                    connection.disconnect();
+                }
             }
-            JSONObject parentObject= null;
             try {
-                parentObject = new JSONObject(json.toString());
+                jObj = new JSONObject(json);
             } catch (JSONException e) {
-                e.printStackTrace();
+
             }
-           // mTextView.setText(parentObject.toString());
             return  null;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+             Toast toast= Toast.makeText(ScanNumberPlate.this,jObj.toString(),Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 

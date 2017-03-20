@@ -27,7 +27,6 @@ public class JSONParser {
         try {
             URL loginUrl=new URL(url);
             connection=(HttpURLConnection)loginUrl.openConnection();
-            connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestMethod("POST");
             connection.connect();
 
