@@ -22,6 +22,9 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 public class ScanNumberPlate extends AppCompatActivity {
@@ -43,7 +46,7 @@ public class ScanNumberPlate extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String str= new String(mTextView.getText().toString().trim());
+                final String str= new String(mTextView.getText().toString().trim());
                 new MaterialDialog.Builder(ScanNumberPlate.this)
                         .title("Search for this License number")
                         .content(str)
@@ -53,6 +56,19 @@ public class ScanNumberPlate extends AppCompatActivity {
                             @Override
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 // License plate number send to the server in the form of JSON
+                                UserFunctions userFunction = new UserFunctions();
+                                JSONObject json = null;
+                                try {
+                                    json = userFunction.merchant(str,"1");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                JSONObject parentObject= null;
+                                try {
+                                    parentObject = new JSONObject(json.toString());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }) // request to server
 

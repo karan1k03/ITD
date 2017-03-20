@@ -4,8 +4,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static raj.mharo.mharorajasthan.AppConfig.URL_CUSTOMER_VEHICLE;
-import static raj.mharo.mharorajasthan.AppConfig.URL_ACCOUNT_INFO;
-import static raj.mharo.mharorajasthan.AppConfig.URL_ACCOUNT_INFO;
+import static raj.mharo.mharorajasthan.AppConfig.URL_MERCHANT;
+import static raj.mharo.mharorajasthan.AppConfig.URL_PAYMENT_GATEWAY;
 
 /**
  * Created by prakash on 10-07-2016.
@@ -16,11 +16,11 @@ public class UserFunctions {
    /* public UserFunctions(){
         jsonParser = new JSONParser();
     }*/
-    public JSONObject loginUser(String email, String password) throws JSONException {
+    public JSONObject merchant(String vehicleNumber, String merchantId) throws JSONException {
         JSONObject jsonObject=new JSONObject();
-        jsonObject.put("userid",email);
-        jsonObject.put("password",password);
-        JSONObject json = jsonParser.getJSONFromUrl(URL_LOGIN,jsonObject);
+        jsonObject.put("mt_id",merchantId);
+        jsonObject.put("plate_number",vehicleNumber);
+        JSONObject json = jsonParser.getJSONFromUrl(URL_MERCHANT,jsonObject);
         return json;
     }
     public JSONObject userVehicleReg(String SSoid, String PlateNumber, String VehicleType) throws JSONException {
@@ -31,7 +31,7 @@ public class UserFunctions {
         JSONObject json = jsonParser.getJSONFromUrl(URL_CUSTOMER_VEHICLE,jsonObject);
         return json;
     }
-    public JSONObject getTransactionByDate(String sessionid, String accountid, String accounttype,String extend, String sDate, String eDate) throws JSONException{
+   /* public JSONObject getTransactionByDate(String sessionid, String accountid, String accounttype,String extend, String sDate, String eDate) throws JSONException{
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("SessionId",sessionid);
         jsonObject.put("AccountID",accountid);
@@ -40,8 +40,7 @@ public class UserFunctions {
         jsonObject.put("StartDate",sDate);
         jsonObject.put("EndDate",eDate);
         JSONObject json=jsonParser.getJSONFromUrl(URL_GET_TRANSACTION_BY_DATE,jsonObject);
-        return json;
+        return json;*/
 
     }
 
-}
