@@ -2,7 +2,6 @@ package raj.mharo.mharorajasthan;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,7 +35,7 @@ public class ScanNumberPlate extends AppCompatActivity {
     public String str;
     private CameraSource mCameraSource;
     Button button3;
-
+    JSONObject parentObject= null;
     private final int REQUESTCAMERA = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,7 +179,7 @@ public class ScanNumberPlate extends AppCompatActivity {
             UserFunctions userFunction = new UserFunctions();
             JSONObject json = null;
             try {
-                json = userFunction.merchant(str,"1");
+                json = userFunction.merchant("1234567","1");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -190,13 +189,14 @@ public class ScanNumberPlate extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-           // mTextView.setText(parentObject.toString());
+            //mTextView.setText(parentObject.toString());
             return  null;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            mTextView.setText(parentObject.toString());
 
         }
     }

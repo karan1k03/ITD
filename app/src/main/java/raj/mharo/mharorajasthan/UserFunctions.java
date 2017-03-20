@@ -4,14 +4,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import static raj.mharo.mharorajasthan.AppConfig.URL_CUSTOMER_VEHICLE;
-import static raj.mharo.mharorajasthan.AppConfig.URL_MERCHANT;
-import static raj.mharo.mharorajasthan.AppConfig.URL_PAYMENT_GATEWAY;
 
 /**
  * Created by prakash on 10-07-2016.
  */
 public class UserFunctions {
-    private JSONParser jsonParser;
+    JSONParser jsonParser= new JSONParser();
 
    /* public UserFunctions(){
         jsonParser = new JSONParser();
@@ -20,7 +18,7 @@ public class UserFunctions {
         JSONObject jsonObject=new JSONObject();
         jsonObject.put("mt_id",merchantId);
         jsonObject.put("plate_number",vehicleNumber);
-        JSONObject json = jsonParser.getJSONFromUrl(URL_MERCHANT,jsonObject);
+        JSONObject json = jsonParser.getJSONFromUrl("http://www.itsohkay.in/mharo_rajasthan_api/merchant_toll.php",jsonObject);
         return json;
     }
     public JSONObject userVehicleReg(String SSoid, String PlateNumber, String VehicleType) throws JSONException {
