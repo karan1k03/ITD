@@ -7,17 +7,52 @@
     tools:context="raj.mharo.mharorajasthan.ScanNumberPlate">
     <SurfaceView
         android:id="@+id/sv_surface"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="367dp"
+        android:layout_height="317dp"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toRightOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="308dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="9dp" />
 
     <TextView
         android:id="@+id/tv_result"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="380dp"
+        android:layout_height="34dp"
         android:textSize="20sp"
         android:layout_alignParentBottom="true"
-        android:text="No text"
+        android:text="License Plate Number"
         android:textColor="@android:color/holo_orange_dark"
-        />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintVertical_bias="0.757"
+        android:layout_marginLeft="2dp"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.928" />
 
 </android.support.constraint.ConstraintLayout>

@@ -2,17 +2,20 @@ package raj.mharo.mharorajasthan;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
@@ -24,12 +27,29 @@ public class ScanNumberPlate extends AppCompatActivity {
     private SurfaceView mCameraView;
     private TextView mTextView;
     private CameraSource mCameraSource;
+    Button button3;
 
     private final int REQUESTCAMERA = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_number_plate2);
+        button3= (Button) findViewById(R.id.button3);
+        init();
+
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new MaterialDialog.Builder(ScanNumberPlate.this)
+                        .title("Search for this License number")
+                        .content(mTextView.getText().toString())
+                        .positiveText("Accept")
+                        .negativeText("Decline")
+                        .show();
+            }
+
+        });
     }
     private void init() {
         mCameraView = (SurfaceView) findViewById(R.id.sv_surface);
@@ -92,7 +112,7 @@ public class ScanNumberPlate extends AppCompatActivity {
                                 for(int i = 0; i < items.size(); i++){
                                     TextBlock item = items.valueAt(i);
                                     stringBuilder.append(item.getValue());
-                                    stringBuilder.append("\n");
+
                                 }
                                 mTextView.setText(stringBuilder.toString());
                             }
