@@ -3,7 +3,7 @@ package raj.mharo.mharorajasthan;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class welcome extends AppCompatActivity {
+public class welcomeU extends AppCompatActivity {
 
 
 

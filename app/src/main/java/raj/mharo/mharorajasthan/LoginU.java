@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Login extends AppCompatActivity {
+public class LoginU extends AppCompatActivity {
 
     EditText email;
     EditText password;
@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                        welcome.class);
+                        welcomeU.class);
                 startActivity(i);
                 finish();
             }
