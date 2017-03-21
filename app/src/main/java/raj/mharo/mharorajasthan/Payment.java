@@ -7,35 +7,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 public class Payment extends AppCompatActivity {
-
     Intent intent;
-    RadioButton wallet,card;
+    Button wallet,card;
     WebView webView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-        intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://www.itsohkay.in/mharo_rajasthan_api/api_test.php?username=Karan&amount=15 0"));
-        wallet= (RadioButton) findViewById(R.id.radioButton);
-        card= (RadioButton) findViewById(R.id.radioButton2);
-        card.setOnClickListener(new View.OnClickListener() {
+
+        wallet= (Button) findViewById(R.id.button7);
+        card= (Button) findViewById(R.id.button8);
+
+
+
+        intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("http://www.itsohkay.in/mharo_rajasthan_api/api_test.php?username=Karan&amount=45"));
+
+        wallet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 startActivity(intent);
             }
         });
-        wallet.setOnClickListener(new View.OnClickListener() {
+        card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-              //  startActivity(intent);
+                //  startActivity(intent);
             }
         });
     }
-
 }
