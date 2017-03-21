@@ -22,6 +22,9 @@ public class LoginM extends AppCompatActivity {
         passwordm= (EditText) findViewById(R.id.input_password2);
         Loginm= (Button) findViewById(R.id.btn_login2);
 
+        emailm.setText("karan123");
+        passwordm.setText("karan123");
+
         Loginm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

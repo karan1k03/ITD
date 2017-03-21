@@ -40,6 +40,9 @@ public class LoginU extends AppCompatActivity {
         password= (EditText) findViewById(R.id.input_password);
         Login= (Button) findViewById(R.id.btn_login);
 
+        email.setText("prakash123");
+        password.setText("prakash123");
+
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
