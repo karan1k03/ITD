@@ -39,7 +39,7 @@ public class ScanNumberPlate extends AppCompatActivity {
     public JSONObject jsonObject;
     private SurfaceView mCameraView;
     private TextView mTextView;
-    public String str;
+
     private CameraSource mCameraSource;
     Button button3;
     public HttpURLConnection connection;
@@ -47,6 +47,7 @@ public class ScanNumberPlate extends AppCompatActivity {
     public static JSONObject jObj = null;
     public static String json = "";
     public StringBuffer buffer=null;
+    String str=" ";
 
     private final int REQUESTCAMERA = 1001;
     @Override
@@ -61,7 +62,7 @@ public class ScanNumberPlate extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final String str= new String(mTextView.getText().toString().trim());
+                 str= new String(mTextView.getText().toString().trim());
                 new MaterialDialog.Builder(ScanNumberPlate.this)
                         .title("Search for this License number")
                         .content(str)
@@ -231,8 +232,11 @@ public class ScanNumberPlate extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-             Toast toast= Toast.makeText(ScanNumberPlate.this,buffer.toString(),Toast.LENGTH_LONG);
-            toast.show();
+            if(buffer.toString().equals("1")){
+                Toast toast= Toast.makeText(ScanNumberPlate.this,"Payment Successful for "+ str,Toast.LENGTH_LONG);
+                toast.show();
+            }
+
         }
     }
 
