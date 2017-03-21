@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,7 +16,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -67,16 +67,16 @@ public class LoginU extends AppCompatActivity {
         {
 
             try {
-                URL loginUrl=new URL("http://www.itsohkay.in/mharo_rajasthan_api/merchant_toll.php");
+                URL loginUrl=new URL("http://www.itsohkay.in/mharo_rajasthan_api/customer_login.php?ssoid=prakash123&pass=prakash123");
                 connection=(HttpURLConnection)loginUrl.openConnection();
-                connection.setRequestMethod("POST");
+                connection.setRequestMethod("GET");
                 connection.connect();
-                jsonObject=new JSONObject();
+                /*jsonObject=new JSONObject();
                 jsonObject.put("ssoid",email);
                 jsonObject.put("pass",pass);
                 OutputStreamWriter details=new OutputStreamWriter(connection.getOutputStream());
                 details.write(jsonObject.toString());
-                details.flush();
+                details.flush();*/
 
                 reader=new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 buffer=new StringBuffer();
@@ -90,8 +90,6 @@ public class LoginU extends AppCompatActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
             } finally {
                 if(connection!=null)
                 {
@@ -103,31 +101,30 @@ public class LoginU extends AppCompatActivity {
             } catch (JSONException e) {
 
             }
-            /*try {
 
-                int Status=parentObject.getInt("Status");
-                String ErrorMessage=parentObject.getString("ErrorMessage");
-                String ExtendedErrorMessage=parentObject.getString("ExtendedErrorMessage");
-                if(Status==200&&(ErrorMessage!=null&&ErrorMessage.isEmpty())&&(ExtendedErrorMessage!=null&&ExtendedErrorMessage.isEmpty()))
-                {
-                   // session.createLoginSession(username,password);
-                    return json.toString();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+           /* if(buffer.toString().equals()
             pDialog.setMessage("Loading User Space");
             pDialog.setTitle("Getting Data");
             Intent intent = new Intent(getApplicationContext(), welcomeU.class);
             intent.putExtra("JsonResponse", s);
             startActivity(intent);
-
+            */
+           if(buffer.toString().equals("1")){
+               Intent intent = new Intent(getApplicationContext(), welcomeU.class);
+               startActivity(intent);
+               finish();
+           }
+           else
+           {
+               Toast toast= Toast.makeText(LoginU.this,"Wrong username or password",Toast.LENGTH_LONG);
+               toast.show();
+           }
         }
     }
 }

@@ -2,7 +2,6 @@ package raj.mharo.mharorajasthan;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,24 +29,24 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ScanNumberPlate extends AppCompatActivity {
-    JSONObject jsonObject;
+    public JSONObject jsonObject;
     private SurfaceView mCameraView;
     private TextView mTextView;
     public String str;
     private CameraSource mCameraSource;
     Button button3;
-    HttpURLConnection connection;
-    BufferedReader reader=null;
-    static JSONObject jObj = null;
-    static String json = "";
-    StringBuffer buffer=null;
+    public HttpURLConnection connection;
+    public BufferedReader reader=null;
+    public static JSONObject jObj = null;
+    public static String json = "";
+    public StringBuffer buffer=null;
 
     private final int REQUESTCAMERA = 1001;
     @Override
@@ -190,18 +189,20 @@ public class ScanNumberPlate extends AppCompatActivity {
         protected String doInBackground(String... strings)
         {
             try {
-                URL loginUrl=new URL("http://www.itsohkay.in/mharo_rajasthan_api/test.php");
+                URL loginUrl=new URL("http://www.itsohkay.in/mharo_rajasthan_api/merchant_toll.php?mt_id=1&plate_number=1234567");
                 connection=(HttpURLConnection)loginUrl.openConnection();
-                   connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+                   connection.setRequestMethod("GET");
                 connection.connect();
-                jsonObject=new JSONObject();
+                /*jsonObject=new JSONObject();
                 jsonObject.put("mt_id","1");
                 jsonObject.put("plate_number","1234567");
+
                  OutputStreamWriter details=new OutputStreamWriter(connection.getOutputStream());
                 details.write(jsonObject.toString());
-                details.flush();
-
-                reader=new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                details.flush();*/
+                InputStream stream=connection.getInputStream();
+                reader=new BufferedReader(new InputStreamReader(stream));
                 buffer=new StringBuffer();
                 String line = "";
                 while ((line = reader.readLine()) != null) {
@@ -212,8 +213,6 @@ public class ScanNumberPlate extends AppCompatActivity {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
                 e.printStackTrace();
             } finally {
                 if(connection!=null)
@@ -232,7 +231,7 @@ public class ScanNumberPlate extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-             Toast toast= Toast.makeText(ScanNumberPlate.this,jObj.toString(),Toast.LENGTH_LONG);
+             Toast toast= Toast.makeText(ScanNumberPlate.this,buffer.toString(),Toast.LENGTH_LONG);
             toast.show();
         }
     }
